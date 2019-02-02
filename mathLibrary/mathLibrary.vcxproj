@@ -28,6 +28,8 @@
   <ItemGroup>
     <ClCompile Include="mathUtil.cpp" />
     <ClCompile Include="vec2.cpp" />
+    <ClCompile Include="vec3.cpp" />
+    <ClCompile Include="vec4.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

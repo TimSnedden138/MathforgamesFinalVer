@@ -2,14 +2,14 @@
 #include "vec2.h"
 vec2::vec2()
 {
-	x = 0;
-	y = 0;
+	x = 0;// setting x to zero
+	y = 0;// setting y to zero
 }
 
 vec2::vec2(float x, float y)
 {
-	this->x = x;
-	this->y = y;
+	this->x = x;// setting this x to x
+	this->y = y;// setting this y to y
 }
 float vec2::magnitude() const
 {
@@ -43,12 +43,12 @@ float vec2::dot(const vec2 & rhs) const
 //
 vec2 vec2::getPerpCW() const
 {
-	return vec2(x,-y);
+	return vec2(x,-y);//returning the negative y and positive x
 }
 
 vec2 vec2::getPerpCCW() const
 {
-	return vec2(-x,y);
+	return vec2(-x,y);//returning the negative x and positive y
 }
 
 //float vec2::angleBetween(const vec2 & rhs) const
@@ -86,32 +86,47 @@ vec2 & vec2::operator+=(const vec2 & rhs)
 
 vec2 & vec2::operator-=(const vec2 & rhs)
 {
-	vec2 red;
-	red.x = x - rhs.x;
-	red.y = y - rhs.x;
-	return red;
+	vec2 one;
+	one.x = x - rhs.x;
+	one.y = y - rhs.x;
+	return one;
 }
 
-//vec2 & vec2::operator*=(const float rhs)
-//{
-//	// TODO: insert return statement here
-//}
-//
-//vec2 & vec2::operator/=(const float rhs)
-//{
-//	// TODO: insert return statement here
-//}
-//
-//bool vec2::operator==(const vec2 & rhs) const
-//{
-//	return false;
-//}
-//
-//bool vec2::operator!=(const vec2 & rhs) const
-//{
-//	return false;
-//}
-//
+vec2 & vec2::operator*=(const float rhs)
+{
+	vec2 one;
+	one.x = x * rhs;
+	one.y = y * rhs;
+	return one;
+}
+
+vec2 & vec2::operator/=(const float rhs)
+{
+	vec2 one;
+	one.x = x / rhs;
+	one.y = y / rhs;
+	return one;
+}
+
+bool vec2::operator==(const vec2 & rhs) const
+{
+	// checking to see if the two values are equal
+	if (x && y == rhs.x && rhs.y) {
+		return true;
+	}
+	return false;
+}
+
+bool vec2::operator!=(const vec2 & rhs) const
+{
+	vec2 one;
+	//checking to if the two values are not equal
+	if (one.x && one.y != rhs.x && rhs.y) {
+		return true;
+	}
+	return false;
+}
+
 //vec2 vec2::operator-() const
 //{
 //	return vec2();

@@ -35,5 +35,5 @@ class vec3
 	operator float *();
 	operator const float *() const;
 };
+vec3 operator*(const float lhs, const vec3 &rhs);
 
-vec3 operator*(const float lhs, const vec3 &rhs); #pragma once
