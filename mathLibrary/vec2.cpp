@@ -1,5 +1,4 @@
-#include <cmath>
-#include "vec2.h"
+#include"libraries.h"
 vec2::vec2()
 {
 	x = 0;// setting x to zero
@@ -21,26 +20,40 @@ float vec2::dot(const vec2 & rhs) const
 	return x * rhs.x + y * rhs.y;
 }
 
-//vec2 & vec2::normalize()
-//{
-//	// TODO: insert return statement here
-//}
-//
-//vec2 vec2::getNormalized() const
-//{
-//	return vec2();
-//}
-//
-//vec2 & vec2::scale(const vec2 & rhs)
-//{
-//	// TODO: insert return statement here
-//}
-//
-//vec2 vec2::getScaled(const vec2 & rhs) const
-//{
-//	return vec2();
-//}
-//
+vec2 & vec2::normalize()
+{
+	float mag = sqrt(x * x + y * y);
+	vec2 magedValues;
+
+	magedValues.x = x / mag;
+	magedValues.y = y / mag;
+
+	return magedValues;
+}
+
+vec2 vec2::getNormalized() const
+{
+	vec2 normalValues;
+
+	normalValues.x = x;
+	normalValues.y = y;
+
+	normalValues.x /= magnitude();
+	normalValues.y /= magnitude();
+
+	return vec2(normalValues);
+}
+
+vec2 & vec2::scale(const vec2 & rhs)
+{
+	return *this = {x * rhs.x,y * rhs.y};
+}
+
+vec2 vec2::getScaled(const vec2 & rhs) const
+{
+	return vec2(x * rhs.x, y * rhs.y);
+}
+
 vec2 vec2::getPerpCW() const
 {
 	return vec2(x,-y);//returning the negative y and positive x
@@ -51,11 +64,11 @@ vec2 vec2::getPerpCCW() const
 	return vec2(-x,y);//returning the negative x and positive y
 }
 
-//float vec2::angleBetween(const vec2 & rhs) const
-//{
-//	return 0.0f;
-//}
-//
+float vec2::angleBetween(const vec2 & rhs) const
+{
+	return std::acos(dot(rhs) / magnitude() * rhs.magnitude());
+}
+
 vec2 vec2::operator+(const vec2 & rhs) const
 {
 	return vec2(x + rhs.x, y + rhs.y);
@@ -126,21 +139,24 @@ bool vec2::operator!=(const vec2 & rhs) const
 	}
 	return false;
 }
+vec2 vec2::operator-() const
+{
+	return vec2(-x, -y);
+}
+vec2::operator float*()
+{
+return &x;
+}
 
-//vec2 vec2::operator-() const
-//{
-//	return vec2();
-//}
-//
-//vec2::operator float*()
-//{
-//}
-//
-//vec2::operator const float*() const
-//{
-//}
-//
-//vec2 operator*(const float lhs, const vec2 & rhs)
-//{
-//	return vec2();
-//}
+vec2::operator const float*() const
+{
+return &x;
+}
+
+vec2 operator*(const float lhs, const vec2 & rhs)
+{
+	 vec2 multiValues;
+	 multiValues.x = lhs * rhs.x;
+	 multiValues.y = lhs * rhs.y;
+	 return vec2(multiValues);
+}

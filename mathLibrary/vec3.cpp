@@ -1,5 +1,4 @@
-#include "vec3.h"
-#include<cmath>
+#include"libraries.h"
 vec3::vec3()
 {
 	x = 0;// setting x to zero
@@ -31,22 +30,39 @@ vec3 vec3::cross(const vec3 & rhs) const
 
 vec3 & vec3::normalize()
 {
-	// TODO: insert return statement here
+	float mag = sqrt(x * x + y * y + z * z);
+	vec3 magedValues;
+
+	magedValues.x = x / mag;
+	magedValues.y = y / mag;
+	magedValues.z = z / mag;
+
+	return(magedValues);
 }
 
 vec3 vec3::getNormalised() const
 {
-	return vec3();
+	vec3 normalValues;
+
+	normalValues.x = x;
+	normalValues.y = y;
+	normalValues.z = z;
+
+	normalValues.x /= magnitude();
+	normalValues.y /= magnitude();
+	normalValues.z /= magnitude();
+
+	return normalValues;
 }
 
 vec3 & vec3::scale(const vec3 & rhs)
 {
-	// TODO: insert return statement here
+	return *this = { x * rhs.x,y * rhs.y,z * rhs.z};
 }
 
 vec3 vec3::getScaled(const vec3 & rhs) const
 {
-	return vec3();
+	return vec3(x * rhs.x, y * rhs.y, z * rhs.z);
 }
 
 vec3 vec3::operator+(const vec3 & rhs) const
@@ -125,18 +141,24 @@ bool vec3::operator!=(const vec3 & rhs) const
 
 vec3 vec3::operator-() const
 {
-	return vec3();
+	return vec3(-x,-y,-z);
 }
 
 vec3::operator float*()
 {
+	return &x;
 }
 
 vec3::operator const float*() const
 {
+	return &x;
 }
 
 vec3 operator*(const float lhs, const vec3 & rhs)
 {
-	return vec3();
+	vec3 multiValues;
+	multiValues.x = lhs * rhs.x;
+	multiValues.y = lhs * rhs.y;
+	multiValues.z = lhs * rhs.z;
+	return vec3(multiValues);
 }

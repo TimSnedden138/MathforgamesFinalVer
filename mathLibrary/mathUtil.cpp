@@ -1,5 +1,4 @@
-#include<iostream>
-#include "mathUtil.h"
+#include "libraries.h"
 int math_help::sum(int a, int b)
 {
 	int c;// value after adding

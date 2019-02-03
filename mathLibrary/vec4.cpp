@@ -1,5 +1,4 @@
-#include "vec4.h"
-#include<cmath>
+#include"libraries.h"
 vec4::vec4()
 {
 	x = 0;// setting x to zero
@@ -34,22 +33,42 @@ vec4 vec4::cross(const vec4 & rhs) const
 
 vec4 & vec4::normalize()
 {
-	// TODO: insert return statement here
+	float mag = sqrt(x * x + y * y + z * z + w * w);
+	vec4 magedValues;
+
+	magedValues.x = x / mag;
+	magedValues.y = y / mag;
+	magedValues.z = z / mag;
+	magedValues.w = w / mag;
+
+	return(magedValues);
 }
 
 vec4 vec4::getNormalised() const
 {
-	return vec4();
+	vec4 normalValues;
+
+	normalValues.x = x;
+	normalValues.y = y;
+	normalValues.z = z;
+	normalValues.w = w;
+
+	normalValues.x /= magnitude();
+	normalValues.y /= magnitude();
+	normalValues.w /= magnitude();
+	normalValues.z /= magnitude();
+
+	return normalValues;
 }
 
 vec4 & vec4::scale(const vec4 & rhs)
 {
-	// TODO: insert return statement here
+	return *this = {x * rhs.x,y * rhs.y,z * rhs.z,w * rhs.w};
 }
 
 vec4 vec4::getScaled(const vec4 & rhs) const
 {
-	return vec4();
+	return vec4(x * rhs.x, y * rhs.y, z * rhs.z, w * rhs.w);
 }
 
 vec4 vec4::operator+(const vec4 & rhs) const
@@ -96,26 +115,31 @@ vec4 & vec4::operator-=(const vec4 & rhs)
 vec4 & vec4::operator*=(const float rhs)
 {
 	vec4 one;
-	one.x = x * x;
-	one.y = y * y;
-	one.z = z * z;
-	one.w = w * w;
+	one.x = x * rhs;
+	one.y = y * rhs;
+	one.z = z * rhs;
+	one.w = w * rhs;
 	return one;
 }
 
 vec4 & vec4::operator/=(const float rhs)
 {
 	vec4 one;
-	one.x = x / x;
-	one.y = y / y;
-	one.z = z / z;
-	one.w = w / w;
+	one.x = x / rhs;
+	one.y = y / rhs;
+	one.z = z / rhs;
+	one.w = w / rhs;
 	return one;
 }
 
 vec4 operator*(const float lhs, const vec4 & rhs)
 {
-	return vec4();
+	vec4 multiValues;
+	multiValues.x = lhs * rhs.x;
+	multiValues.y = lhs * rhs.y;
+	multiValues.z = lhs * rhs.z;
+	multiValues.w = lhs * rhs.w;
+	return vec4(multiValues);
 }
 
 bool vec4::operator==(const vec4 & rhs) const
@@ -138,13 +162,15 @@ bool vec4::operator!=(const vec4 & rhs) const
 
 vec4 vec4::operator-() const
 {
-	return vec4();
+	return vec4(-x,-y,-z,-w);
 }
 
 vec4::operator float*()
 {
+	return &x;
 }
 
 vec4::operator const float*() const
 {
+	return &x;
 }
